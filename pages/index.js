@@ -17,7 +17,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Banner 
-            buttonText="Find the stores near you!" 
+            buttonText="View stores nearby" 
             handleOnClick={handleBannerOnClick}
         />
        

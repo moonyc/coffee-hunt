@@ -4,10 +4,12 @@ export default function Banner (props) {
     return( 
     <div className={styles.container}>
        <h1 className={styles.title}>
-          <span className={styles.title1}>Coffee</span> 
-          <span className={styles.title2}> Hunt</span>
+          SILVESTRO'S
+          <span  className={styles.titleSpan}>
+            TRAVEL GUIDE
+          </span>
         </h1>
-       <p className={styles.subtitle}>Discover yout local coffee shops!</p>
+       <p className={styles.subTitle}>Discover the local coffee shops</p>
        <button 
        className={styles.button}
        onClick={props.handleOnClick}

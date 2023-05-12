@@ -8,52 +8,85 @@
   .title {
     letter-spacing: -0.025em;
     font-weight: 800;
-    color: var(--text-black);
-  
     font-size: 3rem /* 48px */;
     line-height: 1;
+
+    
+  }
+
+  .titleSpan {
+        display: block;
+        color:rgba(165,88,88, 0.6)
   }
   
-  .title1 {
-    color: rgba(249, 250, 251, 1);
-  }
-  
-  .title2 {
-    display: block;
-    color: var(--text-purple);
-  }
+ 
   
   .subTitle {
-    margin-top: 0.75rem;
-    font-size: 1.5rem /* 24px */;
-    line-height: 2rem /* 32px */;
-  
-    color: var(--text-white-100);
+    font-family: "Avenir Next LT W01 Thin",sans-serif;
+    font-size: 1.6rem;
+    font-weight: 100;
+    color: #2a1b43;
+    margin-bottom: 3rem;
+    
+
   }
   
   .buttonWrapper {
     margin-top: 1.25rem;
   }
   
-  .button {
-    background-color: var(--text-purple-dark);
-    cursor: pointer;
-    color: white;
-    outline: 0;
-    border: 0px;
   
-    padding-top: 1rem /* 16px */;
-    padding-bottom: 1rem /* 16px */;
-    font-size: 1.125rem /* 18px */;
-    line-height: 1.75rem /* 28px */;
-    padding-left: 2.5rem /* 40px */;
-    padding-right: 2.5rem /* 40px */;
+
+/* CSS */
+.button {
+    background-color: transparent;
+    border: 1px solid #4d1c0a;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-family: "Avenir Next LT W01 Thin",sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 24px;
+    padding: 16px 23px;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button:hover,
+  .button:active {
+    outline: 0;
   }
   
   .button:hover {
-    background-color: var(--text-purple-dark);
+    background-color: transparent;
+    cursor: pointer;
   }
   
+  .button:before {
+    background-color: rgba(165,88,88, 0.6);
+    content: "";
+    height: calc(100% + 3px);
+    position: absolute;
+    right: -7px;
+    top: -9px;
+    transition: background-color 300ms ease-in;
+    width: 100%;
+    z-index: -1;
+  }
+  
+  .button:hover:before {
+    background-color: #A55858;
+  }
+  
+  @media (min-width: 768px) {
+    .button {
+      padding: 16px 32px;
+    }
+  }
   /** 
     Breakpoints:
     ------------
@@ -114,7 +147,7 @@
       line-height: 1;
     }
   
-    .title2 {
+    .titleSpan {
       padding-left: 0.5rem;
     }
   
@@ -130,7 +163,7 @@
   
   /** xl breakpoint **/
   @media (min-width: 1280px) {
-    .title2 {
+    .titleSpan {
       display: inline;
     }
   }
