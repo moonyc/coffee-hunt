@@ -23,6 +23,22 @@ a {
   text-decoration: none;
 }
 
+p {
+  font-weight: 500;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  p,
+  pre {
+  margin: 0;
+  }
+  
+  
 * {
   box-sizing: border-box;
 }
