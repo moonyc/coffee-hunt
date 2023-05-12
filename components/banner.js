@@ -10,10 +10,14 @@ export default function Banner (props) {
           </span>
         </h1>
        <p className={styles.subTitle}>Discover the local coffee shops</p>
+       <div className={styles.buttonWrapper}>
        <button 
-       className={styles.button}
-       onClick={props.handleOnClick}
-       >{props.buttonText}</button>
+          className={styles.button}
+          onClick={props.handleOnClick}
+          >
+          {props.buttonText}
+          </button>
+       </div>
     </div>
 )
 }
