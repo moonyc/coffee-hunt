@@ -1,9 +1,21 @@
 html,
+:root {
+  --text-purple: rgb(0, 0, 0);
+  --text-purple-dark: rgb(178, 178, 178);
+  --text-black: rgba(17, 24, 39, 1);
+  --text-white-100: rgb(26, 33, 47);
+}
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  background: url("/static/background.png");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 a {
@@ -20,7 +32,7 @@ a {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: black;
+   
   }
 }
