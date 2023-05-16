@@ -2,9 +2,7 @@
 /** Mobile first development **/
 .container {
   margin-bottom: 14rem /* 224px */;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  
   }
   .main {
   margin-top: 2.5rem /* 40px */;
@@ -13,12 +11,9 @@
   max-width: 72rem /* 1152px */;
   
   }
-
-  .heroImage {
-    position: absolute;
-    top: 0px;
-    z-index: 1;
-  }
+  
+  
+ 
   /** Breakpoints:
     sm: min-width: 640px;
     md: min-width: 768px;
