@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles'
 
 export default function Home() {
   const theme = useTheme()
-  const matchesMD = useMediaQuery(theme.breakpoints.up('md'))
+  const matchesLG = useMediaQuery(theme.breakpoints.up('lg'))
 
  
   const handleBannerOnClick = () => {
@@ -33,10 +33,10 @@ export default function Home() {
         </div>
         
         {/* Hero  */}
-       { matchesMD &&
+       { matchesLG &&
         <div className={styles.heroContainer}>
-      <div className={styles.heroImage}>
-        <Image src="/static/hero.png" width={500} height={500} alt="hero" priority/>
+        <div className={styles.heroImage}>
+        <Image src="/static/hero.png" width={700} height={700} alt="hero" priority/>
         </div>
       </div>}
         </section>
