@@ -2,33 +2,32 @@
 .container {
     margin-bottom: 6rem;
     position: relative;
-    margin-right: 2rem;
     z-index: 2;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
   }
 
 
 
-  .heroImage {
-    position: relative;
-    top: 0px;
-    
-  }
+  
   .title {
     letter-spacing: -0.025em;
     font-weight: 800;
-    font-size: 3rem /* 48px */;
-    line-height: 1;
+    font-size: 4rem /* 48px */;
+    
+    
 
     
   }
 
   .titleSpan {
-        display: block;
-        color:rgba(165,88,88, 0.6)
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    font-size: 4.2rem /* 48px */;
+    
+    color:rgba(165,88,88, 0.6)
   }
   
  
@@ -117,9 +116,7 @@
       justify-content: center;
       align-items: center;
     }
-    .heroContainer {
-      display: none;
-    }
+    
     .title {
       font-size: 3rem /* 48px */;
       line-height: 1;
@@ -138,11 +135,7 @@
   
   /** md breakpoint **/
   @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+    
     .title {
       font-size: 3.75rem /* 60px */;
       line-height: 1;
