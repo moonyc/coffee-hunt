@@ -5,7 +5,12 @@ class MyDocument extends Document {
         return(
             <Html lang="en">
                 <Head>
-
+                   <link 
+                    rel="preload"
+                    href='/fonts/BebasNeue-Regular.ttf'
+                    as="font"
+                    crossOrigin='anonymous'
+                   />
                 </Head>
                 <body>
                     <Main></Main>

@@ -36,7 +36,7 @@ export default function Home() {
        { matchesLG &&
         <div className={styles.heroContainer}>
         <div className={styles.heroImage}>
-        <Image src="/static/hero.png" width={700} height={700} alt="hero" priority/>
+        <Image src="/static/hero.png" width={600} height={600} alt="hero" priority/>
         </div>
       </div>}
         </section>
