@@ -4,7 +4,7 @@ import styles from '../../styles/CoffeeStore.module.css'
 
 export default function CoffeeStore () {
     const router = useRouter()
-    console.log('router', router)
+    
     return (
         <div className={styles.container}>
            <main className={styles.main}>

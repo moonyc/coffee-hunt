@@ -4,6 +4,7 @@ import Banner from '../components/banner'
 import styles from '../styles/Home.module.css'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import Card from '../components/card'
 
 
 export default function Home() {
@@ -39,6 +40,14 @@ export default function Home() {
         <Image src="/static/hero.png" width={600} height={600} alt="hero" priority/>
         </div>
       </div>}
+        </section>
+        {/* Cards */}
+        <section className={styles.cards}>
+          <Card 
+           name="Sasha Coffee"
+           imgUrl="/static/sashacoffeehero.png"
+           href="/coffee-store/sashacoffee"
+          />
         </section>
       </main>
     </div>
