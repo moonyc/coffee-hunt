@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
-
+import coffeeStores from '../data/coffee-stores.json'
 
 export default function Home() {
   const theme = useTheme()
@@ -42,12 +42,20 @@ export default function Home() {
       </div>}
         </section>
         {/* Cards */}
-        <section className={styles.cards}>
-          <Card 
-           name="Sasha Coffee"
-           imgUrl="/static/sashacoffeehero.png"
-           href="/coffee-store/sashacoffee"
+        <section className={styles.cardLayout}>
+          {coffeeStores.map(({id, name, imgUrl, websiteUrl, address, neighbourhood}) => {
+          
+           return (
+            <Card 
+            key={id}
+           name={name}
+           imgUrl={imgUrl}
+           href= {`/coffee-store/${id}`}
+           address={address}
+           neighbourhood={neighbourhood}
+           className={styles.card}
           />
+          )})}
         </section>
       </main>
     </div>
