@@ -41,6 +41,20 @@
   .card {
     justify-content: center;
   }
+
+  .heading2 {
+font-size: 2.25rem;
+line-height: 2.5rem;
+padding-bottom: 2rem;
+margin-top: 2rem;
+color: var(--text-white-100);
+}
+
+.secondHeadingContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
   
   /** Breakpoints:
     sm: min-width: 640px;
@@ -63,7 +77,7 @@
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
-
+  
   @media (max-width: 640px) {
     .cardLayout {
       grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -80,6 +94,10 @@
     .cardLayout {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .secondHeadingContainer {
+      justify-content: start;
+    }
   }
   @media (min-width: 1024px) {
     .container {
@@ -94,6 +112,10 @@
     .cardLayout {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+
+    .secondHeadingContainer {
+      justify-content: start;
+    }
   }
 
   @media (min-width: 1280px) {
@@ -102,5 +124,9 @@
     }
     .cardLayout {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .secondHeadingContainer {
+      justify-content: start;
     }
   }

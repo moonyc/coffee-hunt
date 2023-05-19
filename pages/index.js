@@ -5,9 +5,18 @@ import styles from '../styles/Home.module.css'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
-import coffeeStores from '../data/coffee-stores.json'
+import coffeeStoresData from '../data/coffee-stores.json'
 
-export default function Home() {
+// SSG
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      coffeeStores: coffeeStoresData
+    }
+  }
+}
+export default function Home({ coffeeStores }) {
   const theme = useTheme()
   const matchesLG = useMediaQuery(theme.breakpoints.up('lg'))
 
@@ -42,7 +51,13 @@ export default function Home() {
       </div>}
         </section>
         {/* Cards */}
-        <section className={styles.cardLayout}>
+        {coffeeStores.length > 0 && (
+          <>
+            <div className={styles.secondHeadingContainer}>
+            <h2 className={styles.heading2}>Toronto Stores</h2>
+            </div>
+           
+            <section className={styles.cardLayout}>
           {coffeeStores.map(({id, name, imgUrl, websiteUrl, address, neighbourhood}) => {
           
            return (
@@ -57,6 +72,8 @@ export default function Home() {
           />
           )})}
         </section>
+          </>
+        )}
       </main>
     </div>
   )

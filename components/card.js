@@ -16,7 +16,8 @@ export default function Card({name, imgUrl, href}) {
                     className={styles.cardImage}
                     src={imgUrl} 
                     width={260} 
-                    height={160} />
+                    height={260}
+                    alt={`${name}-image`} />
               </div>
             </div>
       </Link>

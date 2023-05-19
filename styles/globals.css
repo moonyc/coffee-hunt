@@ -1,8 +1,9 @@
 html,
 :root {
-  --text-purple-dark: rgb(178, 178, 178);
-  --text-black: rgb(0, 0, 0);
-  --text-white-100: rgb(26, 33, 47);
+  --text-purple: rgba(67, 56, 202, 1);
+  --text-purple-dark: rgba(79, 70, 229, 1);
+  --text-black: rgba(17, 24, 39, 1);
+  --text-white-100: rgb(133, 85, 96);
 }
 body {
   padding: 0;

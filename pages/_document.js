@@ -9,7 +9,8 @@ class MyDocument extends Document {
                     rel="preload"
                     href='/fonts/BebasNeue-Regular.ttf'
                     as="font"
-                    crossOrigin='anonymous'
+                    type='font/ttf'
+                    crossorigin
                    />
                 </Head>
                 <body>
