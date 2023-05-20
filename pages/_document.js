@@ -10,7 +10,7 @@ class MyDocument extends Document {
                     href='/fonts/BebasNeue-Regular.ttf'
                     as="font"
                     type='font/ttf'
-                    crossorigin
+                    crossOrigin="true"
                    />
                 </Head>
                 <body>

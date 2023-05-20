@@ -6,13 +6,16 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
 import coffeeStoresData from '../data/coffee-stores.json'
+import { fetchCoffeeStore } from '../../lib/coffee-stores'
 
 // SSG
 
 export async function getStaticProps(context) {
+  
+  const coffeeStores = await fetchCoffeeStore()
   return {
     props: {
-      coffeeStores: coffeeStoresData
+      coffeeStores: coffeeStores
     }
   }
 }
@@ -54,20 +57,20 @@ export default function Home({ coffeeStores }) {
         {coffeeStores.length > 0 && (
           <>
             <div className={styles.secondHeadingContainer}>
-            <h2 className={styles.heading2}>Toronto Stores</h2>
+            <h2 className={styles.heading2}>Turin Stores</h2>
             </div>
            
             <section className={styles.cardLayout}>
-          {coffeeStores.map(({id, name, imgUrl, websiteUrl, address, neighbourhood}) => {
+          {coffeeStores.map(({fsq_id, name, categories, location}) => {
           
            return (
             <Card 
-            key={id}
+            key={fsq_id}
            name={name}
-           imgUrl={imgUrl}
-           href= {`/coffee-store/${id}`}
-           address={address}
-           neighbourhood={neighbourhood}
+           imgUrl={ '/static/sashacoffeehero.png'}
+           href= {`/coffee-store/${fsq_id}`}
+           address={location.address}
+           neighbourhood={location.locality}
            className={styles.card}
           />
           )})}
