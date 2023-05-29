@@ -31,7 +31,6 @@
   }
 
   .cardLayout {
-    margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     column-gap: 1.5rem;
@@ -55,7 +54,10 @@ color: '#000';
   flex-direction: row;
   justify-content: center;
 }
-  
+
+.sectionWrapper {
+  margin-top: 5rem;
+}
   /** Breakpoints:
     sm: min-width: 640px;
     md: min-width: 768px;

@@ -6,7 +6,6 @@ import Image from 'next/image'
 
 import cls from 'classnames'
 
-import coffeeStoresData from '../../data/coffee-stores.json'
 import { fetchCoffeeStore } from '../../lib/coffee-stores'
 
 

@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
 import { fetchCoffeeStore } from '../lib/coffee-stores'
 import useTrackLocation from '../hooks/use-track-location'
+import { useEffect, useState } from 'react'
 
 // SSG
 
@@ -19,13 +20,29 @@ export async function getStaticProps(context) {
     }
   }
 }
-export default function Home({ coffeeStores }) {
+export default function Home(props) {
   const theme = useTheme()
   const matchesLG = useMediaQuery(theme.breakpoints.up('lg'))
 
   const { handleTrackLocation, latLong, locationErrorMsg, isFindingLocation} = useTrackLocation()
 
-  console.log({latLong, locationErrorMsg})
+  const [coffeeStores, setCoffeeStores] = useState("")
+  const [coffeeStoresError, setCoffeeStoresError] = useState("")
+
+  useEffect(() => {
+     async function setCoffeeStoresByLocation () {
+      if(latLong) {
+        try {
+          const fetchedCoffeeStores = await fetchCoffeeStore(latLong, 30)
+          setCoffeeStores(fetchedCoffeeStores)
+        } catch (error) {
+          setCoffeeStoresError(error.msg)
+        }
+       }
+  }
+  setCoffeeStoresByLocation()
+}, [latLong])
+
   const handleBannerOnClick = () => {
     console.log('hi, banner button')
     handleTrackLocation()
@@ -46,7 +63,7 @@ export default function Home({ coffeeStores }) {
             buttonText={isFindingLocation ? `Locating...` : `View stores nearby`}
             handleOnClick={handleBannerOnClick}
         />
-        {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
+        {coffeeStoresError && <p>Something went wrong: {coffeeStoresError}</p>}
         </div>
         
         {/* Hero  */}
@@ -58,6 +75,7 @@ export default function Home({ coffeeStores }) {
       </div>}
         </section>
         {/* Cards */}
+        <div className={styles.sectionWrapper}>
         {coffeeStores.length > 0 && (
           <>
             <div className={styles.secondHeadingContainer}>
@@ -81,6 +99,7 @@ export default function Home({ coffeeStores }) {
         </section>
           </>
         )}
+        </div>
       </main>
     </div>
   )
