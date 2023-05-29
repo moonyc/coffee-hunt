@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 
 export async function getStaticProps(context) {
   
-  const coffeeStores = await fetchCoffeeStore()
+  const coffeeStores = await fetchCoffeeStore(`40.763999619539604,-73.9724186062827`, 30)
   return {
     props: {
       coffeeStores: coffeeStores
@@ -26,7 +26,7 @@ export default function Home(props) {
 
   const { handleTrackLocation, latLong, locationErrorMsg, isFindingLocation} = useTrackLocation()
 
-  const [coffeeStores, setCoffeeStores] = useState("")
+  const [coffeeStores, setCoffeeStores] = useState(props.coffeeStores)
   const [coffeeStoresError, setCoffeeStoresError] = useState("")
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function Home(props) {
         {coffeeStores.length > 0 && (
           <>
             <div className={styles.secondHeadingContainer}>
-            <h2 className={styles.heading2}>Manhattan Stores</h2>
+            <h2 className={styles.heading2}>{(coffeeStores !== props.coffeeStores) ? "Stores near you" : "Manhattan stores"}</h2>
             </div>
            
             <section className={styles.cardLayout}>
