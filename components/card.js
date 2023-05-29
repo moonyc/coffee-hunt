@@ -3,6 +3,7 @@ import Link from "next/link"
 import styles from './card.module.css'
 import cls from 'classnames'
 
+
 export default function Card({name, imgUrl, href}) {
 
     return(
@@ -15,8 +16,8 @@ export default function Card({name, imgUrl, href}) {
                  <Image 
                     className={styles.cardImage}
                     src={imgUrl} 
-                    width={260} 
-                    height={260}
+                    width={300} 
+                    height={200}
                     alt={`${name}-image`} />
               </div>
             </div>

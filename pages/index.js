@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
 import coffeeStoresData from '../data/coffee-stores.json'
-import { fetchCoffeeStore } from '../../lib/coffee-stores'
+import { fetchCoffeeStore } from '../lib/coffee-stores'
 
 // SSG
 
@@ -57,7 +57,7 @@ export default function Home({ coffeeStores }) {
         {coffeeStores.length > 0 && (
           <>
             <div className={styles.secondHeadingContainer}>
-            <h2 className={styles.heading2}>Turin Stores</h2>
+            <h2 className={styles.heading2}>Manhattan Stores</h2>
             </div>
            
             <section className={styles.cardLayout}>
@@ -67,7 +67,7 @@ export default function Home({ coffeeStores }) {
             <Card 
             key={fsq_id}
            name={name}
-           imgUrl={ '/static/sashacoffeehero.png'}
+           imgUrl={ '/static/cat.webp'}
            href= {`/coffee-store/${fsq_id}`}
            address={location.address}
            neighbourhood={location.locality}

@@ -7,24 +7,27 @@ import Image from 'next/image'
 import cls from 'classnames'
 
 import coffeeStoresData from '../../data/coffee-stores.json'
+import { fetchCoffeeStore } from '../../lib/coffee-stores'
 
 
 export async function getStaticProps(staticProps) {
     const params = staticProps.params;
+    const coffeeStores = await fetchCoffeeStore()
     return {
         props: {
-            coffeeStore : coffeeStoresData.find((coffeeStore) => {
-                return coffeeStore.id.toString() === params.id
+            coffeeStore : coffeeStores.find((coffeeStore) => {
+                return coffeeStore.fsq_id.toString() === params.id
             })
         }
     }
 }
 
-export function getStaticPaths() {
-    const paths = coffeeStoresData.map((coffeeStore) => {
+export async function getStaticPaths() {
+    const coffeeStores = await fetchCoffeeStore()
+    const paths = coffeeStores.map((coffeeStore) => {
         return {
             params: {
-                id: coffeeStore.id.toString(),
+                id: coffeeStore.fsq_id.toString(),
             }
         }
     })
@@ -41,12 +44,11 @@ export default function CoffeeStore (props) {
     }
 
     // Coffee store props
-    const { address, name, neighborhood, imgUrl } = props.coffeeStore;
-
+    const { location, name, imgUrl } = props.coffeeStore;
+    
     const handleUpvoteButton = () => {}
     return (
         <div className={styles.layout}>
-           <h1>Coffee Store Page {router.query.id}</h1>
            <Head>
             <title>{name}</title>
            </Head>
@@ -64,7 +66,7 @@ export default function CoffeeStore (props) {
                         </h1>
                     </div>
                     <Image
-                       src={imgUrl}
+                       src={imgUrl || '/static/cat.webp'}
                        width={600}
                        height={360}
                        className={styles.storeImg}
@@ -72,21 +74,23 @@ export default function CoffeeStore (props) {
                     />
                 </div>
                 <div className={cls("glass", styles.col2)}>
+                    {(location.address || location.formatted_address) && (
                     <div className={styles.iconWrapper}>
                         <Image 
                              src="/static/icons/places.svg"
                              width="24"
                              height="24"
                         />
-                        <p className={styles.text}>{address}</p>
+                        <p className={styles.text}>{location.address || location.formatted_address}</p>
                     </div>
+                    )}
                     <div className={styles.iconWrapper}>
                         <Image 
                             src="/static/icons/nearMe.svg"
                             width="24"
                             height="24"
                         />
-                        <p className={styles.text}>{neighborhood}</p>
+                        <p className={styles.text}>{location.locality} {location.cross_street}</p>
                     </div>
                     <div className={styles.iconWrapper}>
                         <Image 
