@@ -5,8 +5,8 @@ import styles from '../styles/Home.module.css'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
-import coffeeStoresData from '../data/coffee-stores.json'
 import { fetchCoffeeStore } from '../lib/coffee-stores'
+import useTrackLocation from '../hooks/use-track-location'
 
 // SSG
 
@@ -23,9 +23,12 @@ export default function Home({ coffeeStores }) {
   const theme = useTheme()
   const matchesLG = useMediaQuery(theme.breakpoints.up('lg'))
 
- 
+  const { handleTrackLocation, latLong, locationErrorMsg, isFindingLocation} = useTrackLocation()
+
+  console.log({latLong, locationErrorMsg})
   const handleBannerOnClick = () => {
     console.log('hi, banner button')
+    handleTrackLocation()
   }
   return (
     <div className={styles.container}>
@@ -40,9 +43,10 @@ export default function Home({ coffeeStores }) {
         <section className={styles.welcomeSectionContainer}>
         <div className={styles.bannerContainer}>
         <Banner 
-            buttonText="View stores nearby" 
+            buttonText={isFindingLocation ? `Locating...` : `View stores nearby`}
             handleOnClick={handleBannerOnClick}
         />
+        {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
         </div>
         
         {/* Hero  */}
@@ -61,16 +65,16 @@ export default function Home({ coffeeStores }) {
             </div>
            
             <section className={styles.cardLayout}>
-          {coffeeStores.map(({fsq_id, name, imgUrl, location}) => {
+          {coffeeStores.map(({id, name, imgUrl, address, locality}) => {
           
            return (
             <Card 
-            key={fsq_id}
+            key={id}
            name={name}
            imgUrl={ imgUrl }
-           href= {`/coffee-store/${fsq_id}`}
-           address={location.address}
-           neighbourhood={location.locality}
+           href= {`/coffee-store/${id}`}
+           address={address}
+           neighbourhood={locality}
            className={styles.card}
           />
           )})}

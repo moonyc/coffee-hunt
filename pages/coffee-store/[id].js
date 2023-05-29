@@ -16,7 +16,7 @@ export async function getStaticProps(staticProps) {
     return {
         props: {
             coffeeStore : coffeeStores.find((coffeeStore) => {
-                return coffeeStore.fsq_id.toString() === params.id
+                return coffeeStore.id.toString() === params.id
             })
         }
     }
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
     const paths = coffeeStores.map((coffeeStore) => {
         return {
             params: {
-                id: coffeeStore.fsq_id.toString(),
+                id: coffeeStore.id.toString(),
             }
         }
     })
@@ -44,7 +44,7 @@ export default function CoffeeStore (props) {
     }
 
     // Coffee store props
-    const { location, name, imgUrl } = props.coffeeStore;
+    const { name, id, address, formattedAddress, locality, crossStreet, imgUrl } = props.coffeeStore;
     
     const handleUpvoteButton = () => {}
     return (
@@ -56,7 +56,7 @@ export default function CoffeeStore (props) {
                 <div className={styles.col1}>
                     <div className={styles.backToHomeLink}>
                         <Link href="/">
-                            Back to home
+                         ← Back to home
                         </Link>
                     </div>
 
@@ -74,14 +74,14 @@ export default function CoffeeStore (props) {
                     />
                 </div>
                 <div className={cls("glass", styles.col2)}>
-                    {(location.address || location.formatted_address) && (
+                    {(address|| formattedAddress) && (
                     <div className={styles.iconWrapper}>
                         <Image 
                              src="/static/icons/places.svg"
                              width="24"
                              height="24"
                         />
-                        <p className={styles.text}>{location.address || location.formatted_address}</p>
+                        <p className={styles.text}>{address|| formattedAddress}</p>
                     </div>
                     )}
                     <div className={styles.iconWrapper}>
@@ -90,7 +90,7 @@ export default function CoffeeStore (props) {
                             width="24"
                             height="24"
                         />
-                        <p className={styles.text}>{location.locality} {location.cross_street}</p>
+                        <p className={styles.text}>{locality} {crossStreet}</p>
                     </div>
                     <div className={styles.iconWrapper}>
                         <Image 
