@@ -61,13 +61,13 @@ export default function Home({ coffeeStores }) {
             </div>
            
             <section className={styles.cardLayout}>
-          {coffeeStores.map(({fsq_id, name, categories, location}) => {
+          {coffeeStores.map(({fsq_id, name, imgUrl, location}) => {
           
            return (
             <Card 
             key={fsq_id}
            name={name}
-           imgUrl={ '/static/cat.webp'}
+           imgUrl={ imgUrl }
            href= {`/coffee-store/${fsq_id}`}
            address={location.address}
            neighbourhood={location.locality}
