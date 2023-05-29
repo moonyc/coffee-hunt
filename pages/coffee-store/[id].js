@@ -8,7 +8,7 @@ import { useContext, useState, useEffect } from 'react'
 import cls from 'classnames'
 
 import { fetchCoffeeStore } from '../../lib/coffee-stores'
-import { StoreContext } from '../_app'
+import { StoreContext } from '../../store/store-context'
 import { isEmpty } from '../../utils'
 
 export async function getStaticProps(staticProps) {
