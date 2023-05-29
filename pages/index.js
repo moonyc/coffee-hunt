@@ -7,46 +7,63 @@ import { useTheme } from '@mui/material/styles'
 import Card from '../components/card'
 import { fetchCoffeeStore } from '../lib/coffee-stores'
 import useTrackLocation from '../hooks/use-track-location'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { ACTION_TYPES, StoreContext } from './_app'
 
 // SSG
 
 export async function getStaticProps(context) {
-  
-  const coffeeStores = await fetchCoffeeStore(`40.763999619539604,-73.9724186062827`, 30)
+  const coffeeStores = await fetchCoffeeStore()
+
   return {
     props: {
-      coffeeStores: coffeeStores
+      coffeeStores,
     }
   }
 }
+
+
 export default function Home(props) {
   const theme = useTheme()
   const matchesLG = useMediaQuery(theme.breakpoints.up('lg'))
 
-  const { handleTrackLocation, latLong, locationErrorMsg, isFindingLocation} = useTrackLocation()
+  const { handleTrackLocation, locationErrorMsg, isFindingLocation} = useTrackLocation()
 
-  const [coffeeStores, setCoffeeStores] = useState(props.coffeeStores)
+  // const [coffeeStores, setCoffeeStores] = useState(props.coffeeStores)
   const [coffeeStoresError, setCoffeeStoresError] = useState("")
 
+  const { dispatch, state } = useContext(StoreContext)
+
+  const {coffeeStores, latLong} = state
+ 
   useEffect(() => {
      async function setCoffeeStoresByLocation () {
       if(latLong) {
         try {
           const fetchedCoffeeStores = await fetchCoffeeStore(latLong, 30, "cafe")
-          setCoffeeStores(fetchedCoffeeStores)
+          //setCoffeeStores(fetchedCoffeeStores)
+          dispatch({
+            type: ACTION_TYPES.SET_COFFEE_STORES,
+            payload: {
+              coffeeStores: fetchedCoffeeStores
+            }
+          })
         } catch (error) {
           setCoffeeStoresError(error.msg)
         }
        }
   }
   setCoffeeStoresByLocation()
+
 }, [latLong])
 
   const handleBannerOnClick = () => {
-    console.log('hi, banner button')
+   
     handleTrackLocation()
+    
   }
+
+ 
   return (
     <div className={styles.container}>
       <Head>
@@ -79,11 +96,37 @@ export default function Home(props) {
         {coffeeStores.length > 0 && (
           <>
             <div className={styles.secondHeadingContainer}>
-            <h2 className={styles.heading2}>{(coffeeStores !== props.coffeeStores) ? "Stores near you" : "Manhattan stores"}</h2>
+            <h2 className={styles.heading2}>{"Stores near you"}</h2>
             </div>
            
             <section className={styles.cardLayout}>
           {coffeeStores.map(({id, name, imgUrl, address, locality}) => {
+          
+           return (
+            <Card 
+            key={id}
+           name={name}
+           imgUrl={ imgUrl }
+           href= {`/coffee-store/${id}`}
+           address={address}
+           neighbourhood={locality}
+           className={styles.card}
+          />
+          )})}
+        </section>
+          </>
+        )}
+        </div>
+        {/* Cards Static*/}
+        <div className={styles.sectionWrapper}>
+        {props.coffeeStores.length > 0 && (
+          <>
+            <div className={styles.secondHeadingContainer}>
+            <h2 className={styles.heading2}>{"Manhattan stores"}</h2>
+            </div>
+           
+            <section className={styles.cardLayout}>
+          {props.coffeeStores.map(({id, name, imgUrl, address, locality}) => {
           
            return (
             <Card 
