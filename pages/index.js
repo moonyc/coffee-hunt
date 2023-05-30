@@ -14,10 +14,10 @@ import { ACTION_TYPES, StoreContext } from '../store/store-context'
 
 export async function getStaticProps(context) {
   const coffeeStores = await fetchCoffeeStore()
-
+  
   return {
     props: {
-      coffeeStores,
+      coffeeStores
     }
   }
 }
@@ -117,7 +117,7 @@ export default function Home(props) {
           </>
         )}
         </div>
-        {/* Cards Static*/}
+        {/* Cards Static */}
         <div className={styles.sectionWrapper}>
         {props.coffeeStores.length > 0 && (
           <>
