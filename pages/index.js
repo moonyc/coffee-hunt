@@ -40,16 +40,19 @@ export default function Home(props) {
      async function setCoffeeStoresByLocation () {
       if(latLong) {
         try {
-          const fetchedCoffeeStores = await fetchCoffeeStore(latLong, 30, "cafe")
+          const data = await fetch(`/api/getCoffeeStoresByLocation?${latLong}=&limit=30`)
+          const coffeeStores = await data.json()
           //setCoffeeStores(fetchedCoffeeStores)
+          
           dispatch({
             type: ACTION_TYPES.SET_COFFEE_STORES,
             payload: {
-              coffeeStores: fetchedCoffeeStores
+              coffeeStores: coffeeStores
             }
           })
+          setCoffeeStoresError("")
         } catch (error) {
-          setCoffeeStoresError(error.msg)
+          setCoffeeStoresError(error.message)
         }
        }
   }
@@ -80,6 +83,7 @@ export default function Home(props) {
             buttonText={isFindingLocation ? `Locating...` : `View stores nearby`}
             handleOnClick={handleBannerOnClick}
         />
+        {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
         {coffeeStoresError && <p>Something went wrong: {coffeeStoresError}</p>}
         </div>
         
