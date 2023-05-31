@@ -50,6 +50,7 @@ export default function CoffeeStore (initialProps) {
     const id = router.query.id
 
     const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
+    const [voting, setVoting] = useState(0)
     const { state: { coffeeStores }, } = useContext(StoreContext) 
 
     const handleCreateCoffeeStore = async (coffeeStore) => {
@@ -87,16 +88,30 @@ export default function CoffeeStore (initialProps) {
                     return coffeeStore.id.toString() === id
                 })
                 setCoffeeStore(findCoffeeStoreById)
+                
+            }
+        } 
+    }, [id, initialProps.coffeeStore])
+
+    const { name , address, formattedAddress, locality, crossStreet, imgUrl } = coffeeStore;
+    
+    const handleAddToFavesButton = () => {
+        if (isEmpty(initialProps.coffeeStore)) {
+            if ( coffeeStores.length > 0) {
+                const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
+                    return coffeeStore.id.toString() === id
+                })
+                
                 handleCreateCoffeeStore(findCoffeeStoreById)
             }
         } else {
             handleCreateCoffeeStore(initialProps.coffeeStore)
         }
-    }, [id, initialProps.coffeeStore])
+    }
 
-    const { name , address, formattedAddress, locality, crossStreet, imgUrl } = coffeeStore;
-    
-    const handleUpvoteButton = () => {}
+    const handleUpVoteButton = () => {
+
+    }
     return (
         <div className={styles.layout}>
            <Head>
@@ -124,6 +139,7 @@ export default function CoffeeStore (initialProps) {
                     />
                 </div>
                 <div className={cls("glass", styles.col2)}>
+                    
                     {(address|| formattedAddress) && (
                     <div className={styles.iconWrapper}>
                         <Image 
@@ -142,16 +158,20 @@ export default function CoffeeStore (initialProps) {
                         />
                         <p className={styles.text}>{locality} {crossStreet}</p>
                     </div>
-                    <div className={styles.iconWrapper}>
+                    <div className={styles.iconWrapperVoting}>
                         <Image 
                             src="/static/icons/star.svg"
                             width="24"
                             height="24"
                         />
-                        <p className={styles.text}>1</p>
+                        <p className={styles.text}>{voting}</p>
+                        <div className={styles.buttonGroup}>
+                          <button className={styles.buttonUpDown} onClick={() =>  setVoting(voting + 1) }> ↑ </button>
+                          <button className={styles.buttonUpDown} onClick={() =>  setVoting(voting - 1) }> ↓  </button>
+                        </div>
                     </div>
-                    <button className={styles.upvoteButton} onClick={handleUpvoteButton}>
-                        Up 
+                    <button className={styles.button} onClick={handleAddToFavesButton}>
+                        Add to Faves
                     </button>
                 </div>
             </div>
