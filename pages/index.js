@@ -92,7 +92,7 @@ export default function Home(props) {
        { matchesLG &&
         <div className={styles.heroContainer}>
         <div className={styles.heroImage}>
-        <Image src="/static/hero.png" width={600} height={600} alt="hero" priority/>
+        <Image src="/static/hero2.svg" width={1000} height={800} alt="hero" priority/>
         </div>
       </div>}
         </section>

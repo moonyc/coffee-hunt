@@ -166,8 +166,8 @@ export default function CoffeeStore (initialProps) {
                         />
                         <p className={styles.text}>{voting}</p>
                         <div className={styles.buttonGroup}>
-                          <button className={styles.buttonUpDown} onClick={() =>  setVoting(voting + 1) }> ↑ </button>
-                          <button className={styles.buttonUpDown} onClick={() =>  setVoting(voting - 1) }> ↓  </button>
+                          <button className={styles.buttonUpDown} onClick={() =>  voting < 10 ? setVoting(voting + 1) : null}> ↑ </button>
+                          <button className={styles.buttonUpDown} onClick={() =>  voting > 0 ? setVoting(voting - 1) : null }> ↓  </button>
                         </div>
                     </div>
                     <button className={styles.button} onClick={handleAddToFavesButton}>
