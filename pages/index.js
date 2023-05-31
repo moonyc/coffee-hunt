@@ -35,12 +35,13 @@ export default function Home(props) {
   const { dispatch, state } = useContext(StoreContext)
 
   const {coffeeStores, latLong} = state
+  
  
   useEffect(() => {
      async function setCoffeeStoresByLocation () {
       if(latLong) {
         try {
-          const data = await fetch(`/api/getCoffeeStoresByLocation?${latLong}=&limit=30`)
+          const data = await fetch(`/api/getCoffeeStoresByLocation?latLong=${latLong}&limit=30`)
           const coffeeStores = await data.json()
           //setCoffeeStores(fetchedCoffeeStores)
           
