@@ -4,6 +4,7 @@ html,
   --text-purple-dark: rgba(79, 70, 229, 1);
   --text-black: rgba(17, 24, 39, 1);
   --text-white-100: rgb(133, 85, 96);
+
 }
 body {
   padding: 0;

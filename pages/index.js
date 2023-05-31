@@ -67,6 +67,7 @@ export default function Home(props) {
     
   }
 
+  const coffeeStoresArray = coffeeStores ? coffeeStores : props.coffeeStores 
  
   return (
     <div className={styles.container}>
@@ -100,12 +101,12 @@ export default function Home(props) {
         <div className={styles.sectionWrapper}>
         {coffeeStores.length > 0 && (
           <>
-            <div className={styles.secondHeadingContainer}>
-            <h2 className={styles.heading2}>{"Stores near you"}</h2>
-            </div>
+          <div className={styles.locationContainer}>
+            <h2 className={styles.heading2}>{"Stores Near You"}</h2>
+          </div>
            
             <section className={styles.cardLayout}>
-          {coffeeStores.map(({id, name, imgUrl, address, locality}) => {
+          {coffeeStoresArray.map(({id, name, imgUrl, address, locality}) => {
           
            return (
             <Card 
@@ -126,8 +127,9 @@ export default function Home(props) {
         <div className={styles.sectionWrapper}>
         {props.coffeeStores.length > 0 && (
           <>
-            <div className={styles.secondHeadingContainer}>
-            <h2 className={styles.heading2}>{"Manhattan stores"}</h2>
+            
+            <div className={styles.locationContainer}>
+               <h2 className={styles.heading2}>{"Manhattan Stores"}</h2>
             </div>
            
             <section className={styles.cardLayout}>

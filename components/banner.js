@@ -12,7 +12,7 @@ export default function Banner (props) {
           SILVESTRO'S
       </span>
       <span className={styles.title2}>
-          TRAVEL GUIDE
+          <strong className={styles.strong}>TRAVEL GUIDE</strong>
       </span>
       </h1>
        <p className={styles.subTitle}>Discover the local coffee shops</p>

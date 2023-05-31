@@ -6,24 +6,34 @@
   }
 
 
+
   .title {
     letter-spacing: -0.025em;
-    font-weight: 800;
-    font-family: 3rem;
-    line-height: 1M
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 6em;
+    background-image: linear-gradient(gold, gold);
+    background-size: 100% 10px;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    transition: background-size .7s, background-position .5s ease-in-out;
   }
   
-  .title1 {
-    color: var(--text-black)
+  .title:hover {
+    background-size: 100% 100%;
+    background-position: 0% 100%;
+    transition: background-position .7s, background-size .5s ease-in-out;
   }
 
+  .title1 {
+    letter-spacing: 0.05em;
+  }
   .title2 {
     display: block;
-    color:rgba(165,88,88, 0.6)
+    font-weight: 600;
   }
   
- 
-  
+
   .subTitle {
     font-family: "Avenir Next LT W01 Thin",sans-serif;
     font-size: 1.6rem;
