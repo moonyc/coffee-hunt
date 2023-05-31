@@ -52,6 +52,34 @@ export default function CoffeeStore (initialProps) {
     const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
     const { state: { coffeeStores }, } = useContext(StoreContext) 
 
+    const handleCreateCoffeeStore = async (coffeeStore) => {
+        try {
+            const { id, name, address, formattedAddress, locality, crossStreet, imgUrl, voting} = coffeeStore
+            const response = await fetch("/api/createCoffeeStore", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id,
+                    name,
+                    address,
+                    formattedAddress,
+                    locality,
+                    crossStreet,
+                    imgUrl,
+                    voting: 0
+                })
+            })
+            
+            const dbCoffeeStore = await response.json()
+            
+            
+        } catch (err) {
+            console.error("Couldn't create a coffee store", err)
+        }
+    }
+
     useEffect(() => {
         if (isEmpty(initialProps.coffeeStore)) {
             if ( coffeeStores.length > 0) {
@@ -59,9 +87,12 @@ export default function CoffeeStore (initialProps) {
                     return coffeeStore.id.toString() === id
                 })
                 setCoffeeStore(findCoffeeStoreById)
+                handleCreateCoffeeStore(findCoffeeStoreById)
             }
+        } else {
+            handleCreateCoffeeStore(initialProps.coffeeStore)
         }
-    }, [id])
+    }, [id, initialProps.coffeeStore])
 
     const { name , address, formattedAddress, locality, crossStreet, imgUrl } = coffeeStore;
     
@@ -89,7 +120,7 @@ export default function CoffeeStore (initialProps) {
                        width={600}
                        height={360}
                        className={styles.storeImg}
-                       alt={name} 
+                       alt={name || 'name'}  
                     />
                 </div>
                 <div className={cls("glass", styles.col2)}>
