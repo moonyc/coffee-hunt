@@ -4,12 +4,13 @@ import styles from '../../styles/CoffeeStore.module.css'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useContext, useState, useEffect } from 'react'
+import useSWR from 'swr'
 
 import cls from 'classnames'
 
 import { fetchCoffeeStore } from '../../lib/coffee-stores'
 import { StoreContext } from '../../store/store-context'
-import { isEmpty } from '../../utils'
+import { fetcher, isEmpty } from '../../utils'
 
 export async function getStaticProps(staticProps) {
     const params = staticProps.params;
@@ -52,6 +53,9 @@ export default function CoffeeStore (initialProps) {
     const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
     const [voting, setVoting] = useState(0)
     const { state: { coffeeStores }, } = useContext(StoreContext) 
+    
+
+
 
     const handleCreateCoffeeStore = async (coffeeStore) => {
         try {
@@ -94,8 +98,17 @@ export default function CoffeeStore (initialProps) {
     }, [id, initialProps.coffeeStore])
 
     const { name , address, formattedAddress, locality, crossStreet, imgUrl } = coffeeStore;
+
+    const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher)
+    useEffect(() => {
+        if(data && data.length > 0) {
+            console.log("Data from SWR:", data)
+            setCoffeeStore(data[0])
+            setVoting(data[0].voting)
+        }
+    }, [data])
     
-    const handleAddToFavesButton = () => {
+    const handleAddToDBButton = () => {
         if (isEmpty(initialProps.coffeeStore)) {
             if ( coffeeStores.length > 0) {
                 const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
@@ -103,14 +116,39 @@ export default function CoffeeStore (initialProps) {
                 })
                 
                 handleCreateCoffeeStore(findCoffeeStoreById)
+                
             }
         } else {
             handleCreateCoffeeStore(initialProps.coffeeStore)
         }
+        
     }
 
-    const handleUpVoteButton = () => {
+    const handleUpVoteButton = async () => {
+        try {
+            const response = await fetch("/api/favoriteCoffeeStoreById", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id
+                })
+            })
 
+            const dbCoffeeStore = await response.json()
+
+            if (dbCoffeeStore && (dbCoffeeStore.length > 0)) {
+                
+                return setVoting(voting + 1)
+            }
+        } catch (error) {
+            console.log("Error upvoting the coffee store", error)
+        }
+    }
+
+    if (error) {
+        return <div> Something went wrong while trying to retrieve the coffee store page.</div>
     }
     return (
         <div className={styles.layout}>
@@ -166,12 +204,12 @@ export default function CoffeeStore (initialProps) {
                         />
                         <p className={styles.text}>{voting}</p>
                         <div className={styles.buttonGroup}>
-                          <button className={styles.buttonUpDown} onClick={() =>  voting < 10 ? setVoting(voting + 1) : null}> ↑ </button>
-                          <button className={styles.buttonUpDown} onClick={() =>  voting > 0 ? setVoting(voting - 1) : null }> ↓  </button>
+                          <button className={styles.buttonUpDown} onClick={handleUpVoteButton}> ↑ </button>
+                          {/* <button className={styles.buttonUpDown} onClick={() =>  voting > 0 ? setVoting(voting - 1) : null }> ↓  </button> */}
                         </div>
                     </div>
-                    <button className={styles.button} onClick={handleAddToFavesButton}>
-                        Add to Faves
+                    <button className={styles.button} onClick={handleAddToDBButton}>
+                        Start Voting!
                     </button>
                 </div>
             </div>

@@ -91,6 +91,9 @@
   }
   
   @media (max-width: 640px) {
+    .main {
+      margin-top: 3rem /* 48px */;
+    }
     .cardLayout {
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
