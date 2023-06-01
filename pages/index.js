@@ -59,7 +59,7 @@ export default function Home(props) {
   }
   setCoffeeStoresByLocation()
 
-}, [latLong])
+}, [dispatch,latLong])
 
   const handleBannerOnClick = () => {
    
@@ -93,7 +93,12 @@ export default function Home(props) {
        { matchesLG &&
         <div className={styles.heroContainer}>
         <div className={styles.heroImage}>
-        <Image src="/static/hero2.svg" width={1000} height={800} alt="hero" priority/>
+        <Image 
+          src="/static/hero2.svg" 
+          fill
+          sizes="(min-width: 768px) 100vw, (min-width: 1200px) 50vw, 33vw" 
+          alt="hero" 
+          priority/>
         </div>
       </div>}
         </section>

@@ -43,14 +43,14 @@ export async function getStaticPaths() {
 
 export default function CoffeeStore (initialProps) {
     const router = useRouter()
-    if(router.isFallback) {
-        return <div>Loading</div>
-    }
+    // if(router.isFallback) {
+    //     return <div>Loading</div>
+    // } 
 
     // Coffee store props
     const id = router.query.id
 
-    const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
+    const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore || {})
     const [voting, setVoting] = useState(0)
     const { state: { coffeeStores }, } = useContext(StoreContext) 
     
@@ -95,7 +95,7 @@ export default function CoffeeStore (initialProps) {
                 
             }
         } 
-    }, [id, initialProps.coffeeStore])
+    }, [id, initialProps.coffeeStore, coffeeStores])
 
     const { name , address, formattedAddress, locality, crossStreet, imgUrl } = coffeeStore;
 
@@ -155,9 +155,8 @@ export default function CoffeeStore (initialProps) {
            <Head>
             <title>{name}</title>
            </Head>
-            <div className={styles.container}>
-                <div className={styles.col1}>
-                    <div className={styles.backToHomeLink}>
+           <div className={styles.titleAndBackToHomeWrapper}>
+           <div className={styles.backToHomeLink}>
                         <Link href="/">
                          ← Back to home
                         </Link>
@@ -168,6 +167,10 @@ export default function CoffeeStore (initialProps) {
                             {name}
                         </h1>
                     </div>
+           </div>
+            <div className={styles.container}>
+                <div className={styles.col1}>
+                    
                     <Image
                        src={imgUrl || '/static/cat.webp'}
                        width={600}
@@ -184,6 +187,7 @@ export default function CoffeeStore (initialProps) {
                              src="/static/icons/places.svg"
                              width="24"
                              height="24"
+                             alt='address'
                         />
                         <p className={styles.text}>{address|| formattedAddress}</p>
                     </div>
@@ -193,6 +197,7 @@ export default function CoffeeStore (initialProps) {
                             src="/static/icons/nearMe.svg"
                             width="24"
                             height="24"
+                            alt="near me"
                         />
                         <p className={styles.text}>{locality} {crossStreet}</p>
                     </div>
@@ -201,6 +206,7 @@ export default function CoffeeStore (initialProps) {
                             src="/static/icons/star.svg"
                             width="24"
                             height="24"
+                            alt="vote"
                         />
                         <p className={styles.text}>{voting}</p>
                         <div className={styles.buttonGroup}>

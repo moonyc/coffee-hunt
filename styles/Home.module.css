@@ -27,12 +27,14 @@
     right: 0px;
     top: 0px;
     z-index: 1;
+    height: 500px;
+    width: 700px;
     
   }
 
   .cardLayout {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     column-gap: 1.5rem;
     row-gap: 1.5rem;
   }
@@ -43,7 +45,7 @@
 
 
 .heading2 {
-  font-size: 3em;
+  font-size: 2.5em;
   background-image: linear-gradient(gold, gold);
   background-size: 100% 10px;
   background-repeat: no-repeat;
@@ -100,8 +102,8 @@
   }
   @media (min-width: 768px) {
     .container {
-  padding-left: 2.5rem /* 40px */;
-  padding-right: 2.5rem /* 40px */;
+  padding-left: 0rem;
+  padding-right: 0rem 
     }
     .main {
   margin-top: 4rem /* 64px */;
@@ -115,14 +117,29 @@
     }
   }
   @media (min-width: 1024px) {
+    
     .container {
-  padding-left: 2.5rem /* 40px */;
-  padding-right: 2.5rem /* 40px */;
+  padding-left: 0rem /* 40px */;
+  padding-right: 0rem /* 40px */;
     }
     .main {
   margin-top: 5rem /* 80px */;
   padding-left: 2.5rem /* 40px */;
   padding-right: 2.5rem /* 40px */;
+    }
+    .cardLayout {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .secondHeadingContainer {
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    
+    .main {
+      margin-top: 7rem /* 112px */;
     }
     .cardLayout {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -133,15 +150,9 @@
     }
   }
 
-  @media (min-width: 1280px) {
-    .main {
-      margin-top: 7rem /* 112px */;
-    }
-    .cardLayout {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .secondHeadingContainer {
-      justify-content: center;
+  @media (min-width: 1600px) {
+    .heroImage {
+      height: 800px;
+      width: 1000px;
     }
   }

@@ -1,5 +1,6 @@
 .container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   padding-top: 1.75rem /* 28px */;
   padding-bottom: 1.75rem /* 28px */;
   padding-left: 1.75rem /* 12px */;
@@ -10,6 +11,9 @@
   height: 100%;
 }
 
+.titleAndBackToHomeWrapper {
+  padding-left: 2rem;
+}
 .col1 {
   place-self: center;
 }
@@ -59,9 +63,11 @@
   display: flex;
   flex-direction: column;
   margin-left: 0.5rem /* 8px */;
-  align-self: center;
-  margin-top: 4rem /* 64px */;
+  place-self: center;
   color: rgba(55, 59, 100, 1);
+  margin-top: 3rem;
+  width: 100%;
+  
 }
 
 .iconWrapper {
@@ -176,60 +182,55 @@
   left: 0px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 668px) {
+  .col2 {
+    margin-top: 3rem;
+  }
   .button {
     padding: 13px 50px 13px;
   }
+  .layout {
+    padding-left: 2.5rem /* 40px */;
+    padding-right: 2.5rem /* 40px */;
+  }
 }
 
-/* CSS
-.button {
-  background-color: transparent;
-  border: 1px solid #4d1c0a;
-  box-sizing: border-box;
-  color: #ffffff;
-  font-family: "Avenir Next LT W01 Thin",sans-serif;
-  text-transform: uppercase;
-  font-size: 16px;
-  font-weight: 200;
-  line-height: 24px;
-  padding: 16px 23px;
-  position: relative;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+@media (min-width: 700px) {
+  .col2 {
+    margin-top: 3rem;
+  }
 }
 
-.button:hover,
-.button:active {
-  outline: 0;
+
+@media (min-width: 800px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+  }
+  .col2 {
+    margin-top: 3rem;
+  }  
+  .button {
+    padding: 13px 50px 13px;
+  }
+  .layout {
+    height: 100vh;
+    padding-left: 2.5rem /* 40px */;
+    padding-right: 2.5rem /* 40px */;
+  }
+  .col2 {
+    margin-top: 0rem;
+    width: 50%;
+  }
 }
 
-.button:hover {
-  background-color: transparent;
-  cursor: pointer;
-}
 
-.button:before {
-  background-color: rgba(165,88,88, 0.6);
-  content: "";
-  height: calc(100% + 3px);
-  position: absolute;
-  right: -7px;
-  top: -9px;
-  transition: background-color 300ms ease-in;
-  width: 100%;
-  z-index: -1;
-}
-
-.button:hover:before {
-  background-color: #A55858;
-} */
 
 @media (min-width: 1024px) {
   .container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex-direction: row;
+    justify-content: space-evenly;
   }
 
   .layout {
@@ -239,24 +240,7 @@
   }
 
   .col2 {
-    width: 75%;
+    width: 50%;
   }
 }
 
-@media (min-width: 768px) {
-  .layout {
-    padding-left: 2.5rem /* 40px */;
-    padding-right: 2.5rem /* 40px */;
-  }
-}
-
-@media (min-width: 640px) {
-  .container {
-    width: 100%;
-  }
-
-  .layout {
-    padding-left: 1rem /* 16px */;
-    padding-right: 1rem /* 16px */;
-  }
-}

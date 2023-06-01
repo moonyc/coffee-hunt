@@ -9,7 +9,7 @@ export default function Banner (props) {
       
       <h1 className={styles.title}>
       <span className={styles.title1}>
-          SILVESTRO'S
+          SILVESTRO&apos;S
       </span>
       <span className={styles.title2}>
           <strong className={styles.strong}>TRAVEL GUIDE</strong>
